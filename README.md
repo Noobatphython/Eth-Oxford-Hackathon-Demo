@@ -22,7 +22,7 @@ Instead of an order book matching buyers and sellers, we use a **liquidity pool*
 ## How it works
 
 1. A market gets created with a **strike price** and **expiry time**
-2. LPs add liquidity to the pool — this funds settlement payouts
+2. LPs add liquidity to the pool, this funds settlement payouts 
 3. Traders open **long** (gas goes up) or **short** (gas goes down) positions, posting collateral in C2FLR
 4. At expiry, the contract locks the oracle price as the settlement price
 5. Payout = `(settlementPrice - strikePrice) × quantity × leverage + collateral`
