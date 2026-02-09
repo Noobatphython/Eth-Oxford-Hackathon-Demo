@@ -15,7 +15,7 @@ Try it out (after reading below)
 
 There's no way to hedge gas price risk in crypto. Gas costs spike unpredictably and you just have to absorb it. GasCap lets you trade futures on a gas price index so you can actually manage that exposure.
 
-The index is a weighted average pulled from Flare's FTSO v2 oracle: BTC (50%) + ETH (30%) + FLR (20%), updated roughly every 1.8 seconds. The chart shows real oracle prices — no fake data after the initial page load.
+The index is a weighted average pulled from Flare's FTSO v2 oracle: BTC (50%) + ETH (30%) + FLR (20%), updated roughly every 1.8 seconds. The chart shows real oracle prices - no fake data after the initial page load.
 
 Instead of an order book matching buyers and sellers, we use a **liquidity pool**. LPs deposit funds, the pool takes the other side of every trade, and at expiry the smart contract reads the FTSO price and settles everything automatically. No middleman, no clearinghouse.
 
@@ -28,18 +28,18 @@ Instead of an order book matching buyers and sellers, we use a **liquidity pool*
 5. Payout = `(settlementPrice - strikePrice) × quantity × leverage + collateral`
 6. Traders claim their payout on the Settle page. LPs get the rest plus fees
 
-Everything is on-chain. Settlement is trustless — the contract reads the FTSO feed and pays out accordingly.
+Everything is on-chain. Settlement is trustless - the contract reads the FTSO feed and pays out accordingly.
 
 ## Features
 
-- **Live FTSO price feed** — real oracle data plotted on a TradingView-style candlestick chart (1m, 5m, 15m, 60m timeframes)
-- **Long and short positions** — bet on gas going up or down
-- **Leverage** — 1x to 100x (use carefully, there's no liquidation engine)
-- **Liquidity pool** — LPs provide capital and earn from trading fees
-- **Automatic settlement** — contract reads oracle at expiry, calculates payouts, done
-- **Factory pattern** — anyone can create new markets with custom strike prices and expiry times
-- **On-chain transparency** — every trade, deposit, and settlement is visible on the Coston2 block explorer
-- **Depeg Shield (Phase 2)** — stablecoin depeg protection using FTSO + FDC cross-chain verification (separate branch)
+- **Live FTSO price feed** - real oracle data plotted on a TradingView-style candlestick chart (1m, 5m, 15m, 60m timeframes)
+- **Long and short positions** - bet on gas going up or down
+- **Leverage** - 1x to 100x (use carefully, there's no liquidation engine)
+- **Liquidity pool** - LPs provide capital and earn from trading fees
+- **Automatic settlement** - contract reads oracle at expiry, calculates payouts, done
+- **Factory pattern** - anyone can create new markets with custom strike prices and expiry times
+- **On-chain transparency** - every trade, deposit, and settlement is visible on the Coston2 block explorer
+- **Depeg Shield (Phase 2)** - stablecoin depeg protection using FTSO + FDC cross-chain verification (separate branch)
 
 ## Try the demo
 
@@ -48,7 +48,7 @@ Everything is on-chain. Settlement is trustless — the contract reads the FTSO 
 ### What you need
 
 - **MetaMask** (or any EVM wallet)
-- **Coston2 testnet C2FLR tokens** — free test tokens, not real money. Get them from the [Coston2 faucet](https://faucet.flare.network/coston2)
+- **Coston2 testnet C2FLR tokens** - free test tokens, not real money. Get them from the [Coston2 faucet](https://faucet.flare.network/coston2)
 
 ### Setup
 
@@ -70,7 +70,7 @@ Get test C2FLR from the faucet, connect your wallet, and you're in.
 2. Choose **LONG** or **SHORT** on the right panel
 3. Set your quantity (contracts) and collateral (C2FLR)
 4. Submit through MetaMask
-5. Wait for expiry — the 48h market expires Feb 10, 00:41 UTC as an example
+5. Wait for expiry - the 48h market expires Feb 10, 00:41 UTC as an example
 6. Go to the **Settle** page to claim your payout after settlement
 
 ### Adding liquidity
@@ -85,7 +85,7 @@ This was built in 43 hours at a hackathon. It works, but here's what you should 
 
 **The gas index is an estimate.** The "gas price" is derived from FTSO price feeds (BTC/ETH/FLR weighted), not actual Ethereum network gas costs. We started integrating real gas data via Flare's FDC protocol and Beaconcha.in, but the FTSO-derived index is what's live. The numbers on the chart are directionally right but not exact gas prices.
 
-**The pool has no money in it.** This is a testnet demo — nobody has deposited meaningful liquidity. To actually test a full trade cycle, you'd need to:
+**The pool has no money in it.** This is a testnet demo - nobody has deposited meaningful liquidity. To actually test a full trade cycle, you'd need to:
 1. Add liquidity yourself on the Pool page (be both the LP and the trader)
 2. Open a position
 3. Wait for expiry
@@ -93,7 +93,7 @@ This was built in 43 hours at a hackathon. It works, but here's what you should 
 
 **The 48h expiry is just an example.** We set one market to 30 seconds (for quick demo purposes) and one to 48 hours (to show a realistic timeframe). You can create markets with any expiry via the Factory contract.
 
-**No liquidation engine.** Leveraged positions can go underwater and there's nothing to close them early. In a real product you'd need this — we didn't have time.
+**No liquidation engine.** Leveraged positions can go underwater and there's nothing to close them early. In a real product you'd need this - we didn't have time.
 
 **One position per trader per market.** Simplification for the MVP. A real exchange would let you have multiple.
 
@@ -101,7 +101,7 @@ This was built in 43 hours at a hackathon. It works, but here's what you should 
 
 ## On-chain activity
 
-Everything is verifiable on the [Coston2 block explorer](https://coston2-explorer.flare.network). You can see our example transactions : market creation, liquidity deposits, position opens — all public on-chain.
+Everything is verifiable on the [Coston2 block explorer](https://coston2-explorer.flare.network). You can see our example transactions : market creation, liquidity deposits, position opens - all public on-chain.
 
 | Contract | Address |
 |----------|---------|
@@ -114,7 +114,7 @@ Everything is verifiable on the [Coston2 block explorer](https://coston2-explore
 
 **Why a pool instead of an order book?**
 
-Futures need a counterparty for every trade. On a testnet with no users, there's nobody on the other side. The LP pool solves this — it always takes the other side, so you can trade immediately even with zero other traders.
+Futures need a counterparty for every trade. On a testnet with no users, there's nobody on the other side. The LP pool solves this - it always takes the other side, so you can trade immediately even with zero other traders.
 
 **Reserve factor (70%)** limits how much exposure the pool can take relative to its liquidity. If the pool has 100 C2FLR, max total exposure is 70 C2FLR. This prevents the pool from being unable to cover payouts if all positions go against it.
 
@@ -139,7 +139,7 @@ Futures need a counterparty for every trade. On a testnet with no users, there's
 
 ## Also built: Depeg Shield (Phase 2)
 
-Stablecoin depeg protection — parametric insurance where you pay a premium and get paid out automatically if USDC or USDT drops below a price barrier for 15+ minutes. Uses FTSO for price monitoring and FDC for cross-chain verification that the depeg is real and systemic, not just one exchange glitching. On a separate branch, not fully integrated into the main app yet.
+Stablecoin depeg protection - parametric insurance where you pay a premium and get paid out automatically if USDC or USDT drops below a price barrier for 15+ minutes. Uses FTSO for price monitoring and FDC for cross-chain verification that the depeg is real and systemic, not just one exchange glitching. On a separate branch, not fully integrated into the main app yet.
 
 ## License
 
