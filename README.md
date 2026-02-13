@@ -43,7 +43,7 @@ Everything is on-chain. Settlement is trustless - the contract reads the FTSO fe
 
 ## Try the demo
 
-**Live demo:** [eth-oxford-future-863727-5575b.web.app](https://eth-oxford-future-863727-5575b.web.app)
+**Live demo:** [eth-oxford-future-863727-5575b.web.app](https://eth-oxford-future-9nzdjph44-noobatphythons-projects.vercel.app/)
 
 ### What you need
 
